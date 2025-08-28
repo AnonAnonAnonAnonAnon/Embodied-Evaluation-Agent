@@ -1,0 +1,12 @@
+.DS_Store
+*pyc
+.vscode
+__pycache__
+*.egg-info
+
+**checkpoints
+**checkpoint
+**weights
+
+*.gif
+*.mp4
