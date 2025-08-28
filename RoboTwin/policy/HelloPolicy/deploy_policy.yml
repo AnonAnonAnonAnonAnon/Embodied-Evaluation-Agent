@@ -1,0 +1,15 @@
+# Basic experiment configuration (keep unchanged)
+policy_name: HelloPolicy #策略名字
+task_name: null
+task_config: null
+ckpt_setting: null
+seed: null
+instruction_type: unseen
+
+# Add Parameters You Need
+
+# 添加：
+action_type: ee      # 末端位姿控制，维度固定，最适合做最小示例
+dz: 0.05             # 每步把左臂 Z 方向抬高 5 cm
+open_close: true     # 演示开合夹爪
+steps: 25            # 总共执行 25 步

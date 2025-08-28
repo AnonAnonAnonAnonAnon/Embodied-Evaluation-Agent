@@ -1,0 +1,604 @@
+{
+  "questions": [
+    {
+      "question": "How well can the model visualize my ideas based on my words?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How aligned is the generated content with the provided description?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model understand specific terms, objects, and intentions?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model respond to ambiguous prompts? Does it handle missing or vague information effectively?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How closely does the generated output correspond to the prompts provided?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the generated result match the description?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model maintain style consistency across multiple generations from the same prompt?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model distinguish between subtle variations in style (e.g., modern vs. postmodern art)?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "What style does the model tend to generate most often?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model adapt to different stylistic instructions with accuracy and consistency?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How precisely can the user specify object relationships?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model maintain object proportions and spatial relationships in complex scenes?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How effectively does the model handle changes in perspective?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model demonstrate flexibility in generating different compositions from similar prompts?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How precisely can I control the generative model?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model tend to simplify complex objects or details, or does it retain high levels of intricacy?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model adjust its output when given slight variations of the same prompt (e.g., changes in tone or context)?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model handle varying levels of detail in its outputs?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model generate similar outputs when there are only small changes in the prompts?",
+      "ability": "Prompt Following",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model balance contrasting elements, such as light and dark or complex and simple?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "To what extent can the model produce photorealistic and aesthetically pleasing results?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate realistic images without common AI-generated artifacts?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can it generate physically plausible results?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How realistic is the generated content?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can it generate results that are as realistic as possible?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How real are the generated results?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate high-fidelity content?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate real-life scenes?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model maintain high image quality when generating large or detailed scenes?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model tend to generate more photorealistic images or stylized, cartoonish ones?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model mimic camera effects such as zooming, panning, or focus pulls, especially when not explicitly described in the prompt?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model balance aesthetic elements like space, flow, and symmetry in a room setting?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model be effectively applied in different scenarios, such as varying lighting conditions and environments?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model handle lighting and movement?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How effectively can the model simulate real-world lighting effects for interior and exterior spaces?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate high-fidelity visualizations for natural phenomena like fluid dynamics or planetary orbits?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model handle dynamic elements like action or motion?",
+      "ability": "Visual Quality",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model generate realistic scenes for a sci-fi film?",
+      "ability": "Visual Quality",
+      "general_or_specific": "Specific",
+      "category": "Film and Entertainment"
+    },
+    {
+      "question": "How effectively can the model manage physical realism, such as lighting, shadows, and accurate human anatomy?",
+      "ability": "Visual Quality",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "Can the model generate detailed game environments such as forests, cities, or futuristic settings?",
+      "ability": "Visual Quality",
+      "general_or_specific": "Specific",
+      "category": "Game Design"
+    },
+    {
+      "question": "How well can the model interpret abstract or metaphorical concepts? Does it translate non-literal ideas into visual form effectively?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model present concepts to explore creative possibilities?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model blend different genres or themes successfully?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model balance realism with creativity? Can it generate imaginative scenes while maintaining visual plausibility?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model capture the mood or atmosphere of a given prompt?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How effectively can the model represent non-visual concepts, such as emotions or abstract ideas?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How does the model handle the depiction of abstract concepts or metaphors in video form? For example, can it animate a 'storm of emotions' or 'time flowing like water'?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model handle contradictory visual cues in a prompt? For example, can it create a 'sunset during a snowstorm' or a 'frozen ocean with waves'?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model integrate symbolic or surreal elements, like a tree growing out of someone's hand, while keeping the scene coherent and natural?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model render entirely fictional creatures or physics-defying actions like characters walking on walls or gravity reversing?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate content that evolve dynamically, where the scene or characters change in response to the user's previous inputs?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model interpret narrative-driven prompts where characters are engaging in emotionally complex interactions without explicit action descriptors?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How does the model handle unusual or impossible lighting conditions, like 'darkness lit only by the glow of thoughts' or 'a world where shadows are brighter than light'?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate variations of existing artwork while maintaining the original style?",
+      "ability": "Creativity",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model create videos with non-linear narratives, such as time jumps or reverse chronology? Can it handle multiple timelines that converge or diverge?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Film and Entertainment"
+    },
+    {
+      "question": "Is the generated content sufficiently diverse, including rare or niche fields?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well the model can generate a specific number of objects?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model tend to overuse specific colors or textures, or does it offer diverse visual outputs?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Does the model generate diverse results for the same prompt, or does it repeat patterns?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate flowcharts effectively?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Science and Education"
+    },
+    {
+      "question": "How well can the model generate presentation slides?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Science and Education"
+    },
+    {
+      "question": "Can the model generate clear, courtroom-friendly diagrams to illustrate complex legal cases?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Law"
+    },
+    {
+      "question": "How well can the model generate accurate, scalable floor plans or blueprints?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Architecture and Interior Design"
+    },
+    {
+      "question": "Can the model generate structurally sound designs based on vague architectural concepts?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Architecture and Interior Design"
+    },
+    {
+      "question": "How effectively can the model visualize fictional worlds or characters with great detail?",
+      "ability": "Creativity",
+      "general_or_specific": "Specific",
+      "category": "Film and Entertainment"
+    },
+    {
+      "question": "Can the model generate images that visually suggest different stages of a continuous event or process (e.g., sunrise to sunset progression)?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model interpret abstract emotional concepts into visual formats?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "How accurately can the model depict human expressions or body language for psychological studies?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "Can the model generate different animal anatomical structures?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "Can the model generate detailed steps of surgical procedures that cannot be shown in typical surgery videos?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "Can the model understand and apply photographic concepts like focal length, aperture, or ISO?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Film and Entertainment"
+    },
+    {
+      "question": "How accurately can the model generate medical images like X-rays or MRI scans from brief descriptions?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "How does the model handle prompts with explicit restrictions, like generating an image ‘with no use of circular shapes’ or ‘without blue hues’?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well can the model generate 3D visualizations of internal organs or surgical procedures?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "Can the model handle complex, culturally specific objects, symbols, or rituals?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "History and Culture"
+    },
+    {
+      "question": "Can the model generate precise visual representations of complex mathematical graphs or formulas?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Science and Education"
+    },
+    {
+      "question": "How accurately does the model generate scientific diagrams like molecular structures or physics simulations?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Science and Education"
+    },
+    {
+      "question": "How accurately can the model recreate historical scenes, objects, or clothing based on text inputs?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "History and Culture"
+    },
+    {
+      "question": "Can the model accurately depict diverse cultural or historical elements?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "History and Culture"
+    },
+    {
+      "question": "How well can the model recreate a crime scene based on textual descriptions or evidence?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Law"
+    },
+    {
+      "question": "How accurately does the model generate facial composites based on a witness’s description?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Law"
+    },
+    {
+      "question": "Can the model generate anime characters?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Game Design"
+    },
+    {
+      "question": "How precisely can the model replicate specific art styles, such as pixel art or 3D-rendered graphics?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Game Design"
+    },
+    {
+      "question": "How well does the model interpret perspective and depth in a scene?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Game Design"
+    },
+    {
+      "question": "Can the model generate geometric and texture effects?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Game Design"
+    },
+    {
+      "question": "Can the model generate game characters with intricate details like armor or facial expressions?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Game Design"
+    },
+    {
+      "question": "Can the model generate objects with highly structured textures, such as accurately rendering five fingers on a hand?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Medical"
+    },
+    {
+      "question": "Can the model accurately generate fashion sketches with fine detailing of fabrics and textures?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Fashion"
+    },
+    {
+      "question": "Can the model generate complex storyboards incorporating multiple objects, characters, and settings in one scene?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Film and Entertainment"
+    },
+    {
+      "question": "How accurately can the model generate detailed room layouts with attention to furniture, textures, and color schemes?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Architecture and Interior Design"
+    },
+    {
+      "question": "Can the model handle fine detailing of various materials like wood, metal, or fabric in generated interiors?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Architecture and Interior Design"
+    },
+    {
+      "question": "How well can the model represent subtle textures such as skin, fabric, or foliage?",
+      "ability": "Knowledge",
+      "general_or_specific": "Specific",
+      "category": "Fashion"
+    },
+    {
+      "question": "How quickly can the model generate a 3–5-second video with a specific theme?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model differentiate the relationships of characters in the prompts?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "How well does the model handle varying levels of detail in its outputs?",
+      "ability": "Others",
+      "general_or_specific": "General",
+      "category": ""
+    },
+    {
+      "question": "Can the model generate structurally sound designs based on vague architectural concepts?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Architecture and Interior Design"
+    },
+    {
+      "question": "Can the model blend or fuse different design elements (e.g., mix traditional and modern fashion elements in one outfit)?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Fashion"
+    },
+    {
+      "question": "Is the model capable of generating designs tailored to individual body types or preferences?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Fashion"
+    },
+    {
+      "question": "How well does the model handle creating looks for specific occasions, such as casual, formal, or streetwear?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Fashion"
+    },
+    {
+      "question": "How well can the model represent various fashion trends or styles based on vague descriptions?",
+      "ability": "Others",
+      "general_or_specific": "Specific",
+      "category": "Fashion"
+    }
+  ]
+}

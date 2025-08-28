@@ -1,0 +1,26 @@
+batch_size: 1
+cfg_scale: 15.0
+ckpt_path: models/base_t2v/model.ckpt
+config_path: models/base_t2v/model_config.yaml
+ddim_steps: 50
+ddp: false
+decode_frame_bs: 1
+eta: 1.0
+gpu_id: 0
+inject_lora: false
+local_rank: 0
+lora_path: null
+lora_scale: null
+lora_trigger_word: ''
+n_samples: 5
+num_frames: 16
+prompt: a cat wearing sunglasses and working as a lifeguard at pool.
+sample_type: ddim
+save_dir: /mnt/petrelfs/zhangfan.p/zhangfan/evaluate-agent/agent/models/VC_09/
+save_fps: 8
+save_jpg: false
+save_mp4: true
+save_mp4_sheet: false
+save_npz: false
+seed: 2
+show_denoising_progress: true

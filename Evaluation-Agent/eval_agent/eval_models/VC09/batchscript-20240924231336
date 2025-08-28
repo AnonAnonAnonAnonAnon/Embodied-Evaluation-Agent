@@ -1,0 +1,42 @@
+#!/bin/bash
+#SBATCH --partition Video-aigc-general
+#SBATCH --gres gpu:1
+#SBATCH --cpus-per-task 16
+#SBATCH --nodes 1
+#SBATCH --quotatype reserved
+#SBATCH --nodes 1
+#SBATCH --job-name eval_videocrafter
+#SBATCH -o phoenix-slurm-%j.out
+# args: -p
+# args: Video-aigc-general
+# args: --gres=gpu:1
+# args: --cpus-per-task=16
+# args: -N1
+# args: --quotatype=reserved
+# args: -N1
+# args: --job-name=eval_videocrafter
+# args: python
+# args: sample_text2video.py
+# args: --ckpt_path
+# args: models/base_t2v/model.ckpt
+# args: --config_path
+# args: models/base_t2v/model_config.yaml
+# args: --prompt
+# args: /mnt/petrelfs/yujiashuo/Large-Video-Inference/txt/VideoAIGC-Eval-PromptPreparation-2023-08/prompt_by_class/pexels_selected/transportation_selected100_en.txt
+# args: --save_dir
+# args: /mnt/petrelfs/share_data/yujiashuo/sample/sample_videocraft/transportation_selected100_en/
+# args: --n_samples
+# args: 5
+# args: --batch_size
+# args: 1
+# args: --seed
+# args: 2
+# args: --show_denoising_progress
+argv=()
+while read -r line; do
+    if [[ $line == "# args: "* ]]; then
+        argv[${#argv[*]}]="${line:8}"
+    fi
+done < $0
+
+srun "${argv[@]}"

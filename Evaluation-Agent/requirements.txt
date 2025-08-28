@@ -1,0 +1,8 @@
+torch==2.0.0
+torchvision==0.15.1
+openai
+transformers
+diffusers
+levenshtein
+pandas
+numpy==1.24.1
