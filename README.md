@@ -3,3 +3,5 @@
 项目结构：目前两个文件夹放了两个项目，EvaluationAgent和RoboTwin，后续就基于这两个开发，直接改代码就行
 
 注释：写东西最好放点简单的注释，gpt能看懂就行
+
+I've just decided to ignore all the assets in the repository due to huge space occupation. So if you want to run the code in a new device or a new working directory, REMEMBER TO DOWNLOAD OR COPY THE ASSETS.
