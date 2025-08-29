@@ -15,6 +15,7 @@ class Latte1:
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.video_length = 16 # 1 (text-to-image) or 16 (text-to-video)
         self.pipe = LattePipeline.from_pretrained(self.model_path, torch_dtype=torch.float16).to(self.device) # "maxin-cn/Latte-1"
+        
         # Using temporal decoder of VAE
         vae = AutoencoderKLTemporalDecoder.from_pretrained(self.model_path, subfolder="vae_temporal_decoder", torch_dtype=torch.float16).to(self.device) # "maxin-cn/Latte-1"
         self.pipe.vae = vae

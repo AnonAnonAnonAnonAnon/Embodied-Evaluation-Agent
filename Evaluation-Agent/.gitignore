@@ -10,3 +10,5 @@ __pycache__
 
 *.gif
 *.mp4
+eval_models/
+open_domain_eval_result/
