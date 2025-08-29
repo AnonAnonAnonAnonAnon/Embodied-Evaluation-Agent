@@ -5,7 +5,13 @@ import json
 class BaseAgent:
     def __init__(self, system_prompt="", use_history=True, temp=0, top_p=1):
         self.use_history = use_history
-        self.client = OpenAI()
+        # self.client = OpenAI()
+        self.client = OpenAI(
+            # defaults to os.environ.get("OPENAI_API_KEY")
+            api_key="sk-xDai8Jxb9bLlXroX6bFiS9MF96fj0tqAe8Zc9mPV0xjDK98S",
+            base_url="https://api.chatanywhere.tech/v1"
+            # base_url="https://api.chatanywhere.org/v1"
+        )
         self.system = system_prompt
         self.temp = temp
         self.top_p = top_p
