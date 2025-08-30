@@ -8,7 +8,8 @@ sys.path.insert(0, "eval_tools")
 from eval_tools.vlm.gpt import GPT
 
 
-
+# 负责根据输入 prompt 调用不同生成模型（视频 or 图片）。
+# 不直接生成，而是包装各个子模型的 predictor。
 class GenModel:
     def __init__(self, model_name, save_mode="video") -> None:
         self.save_mode = save_mode
@@ -42,6 +43,7 @@ class GenModel:
     
     
     def predict(self, prompt, save_path):
+        # 保存格式
         os.makedirs(save_path, exist_ok=True)
         name = prompt.strip().replace(" ", "_")
         if self.save_mode == "video":
@@ -56,17 +58,20 @@ class GenModel:
 
 
 
-
-
+# 提供各种评估工具（evaluation tools），比如：
+# 图像绑定检测（color_binding, shape_binding, texture_binding）
+# 视频一致性、画质、美学风格、动作检测等指标（来自 eval_tools.vbench）。
+# 核心方法：call(tool_name, data) —— 动态调用相应评估函数。  
 class ToolBox:
     def __init__(self) -> None:
         pass
     
-
+    # 动态调用评估函数
     def call(self, tool_name, video_pairs):
+        # 等于是把类的方法当成“插件”，通过字符串动态调用。
         method = getattr(self, tool_name, None)
-        
-        
+        # 如果方法存在且可调用，则执行并返回结果。
+        # 否则抛出错误。
         if callable(method):
             return method(video_pairs)
         else:
@@ -177,7 +182,10 @@ class ToolBox:
 
 
 
-        
+# 对上层开放的入口：
+# sample(prompts, save_path) → 调用 GenModel 生成内容
+# eval(tool_name, data) → 调用 ToolBox 做评估
+# vlm_eval(content_path, question) → 调用 GPT 对生成的图片/视频进行问答分析    
 class ToolCalling:
     def __init__(self, sample_model, save_mode):
         self.gen = GenModel(sample_model, save_mode)
@@ -186,6 +194,8 @@ class ToolCalling:
 
 
     def sample(self, prompts, save_path):
+        # 生成内容
+        # 包含 prompt 和生成文件路径的 list
         info_list = []
         for prompt in tqdm(prompts):
             prompt, content = self.gen.predict(prompt, save_path)
@@ -197,17 +207,19 @@ class ToolCalling:
 
 
     def eval(self, tool_name, video_pairs):
+        # 评估
         results = self.eval_tools.call(tool_name, video_pairs)
         return results
     
     
     def vlm_eval(self, content_path, question):
+        # 分析
         response = self.vlm_gpt.predict(content_path, question)
         return response
 
 
 
-
+# 把评估结果保存为 JSON 文件。
 def save_json(content, file_path):
     with open(file_path, 'w') as json_file:
         json.dump(content, json_file, indent=4)
