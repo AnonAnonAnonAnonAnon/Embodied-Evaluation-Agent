@@ -26,8 +26,6 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-
-
 class EvalAgent:
     def __init__(self, sample_model="sdxl-1", save_mode="img"):
         # tools对象 (图像生成/评估工具集)
@@ -80,7 +78,8 @@ class EvalAgent:
     def update_info(self):
         # 创建保存路径，准备结果文件。
         folder_name = datetime.now().strftime('%Y-%m-%d-%H:%M:%S') + "-" + self.user_query.replace(" ", "_")
-        self.save_path = f"./open_domain_results/{self.sample_model}/{folder_name}"
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        self.save_path = f"{BASE_DIR}/open_domain_results/{self.sample_model}/{folder_name}"
         os.makedirs(self.save_path, exist_ok=True)
         
         self.image_folder = os.path.join(self.save_path, "images")
@@ -129,8 +128,6 @@ def main():
     open_agent = EvalAgent(sample_model=args.model, save_mode="img")
     # 开始探索
     open_agent.explore(user_query)
-
-
 
 if __name__ == "__main__":
     main()
