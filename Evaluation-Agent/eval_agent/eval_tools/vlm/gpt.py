@@ -26,7 +26,7 @@ class GPT:
             print("Using official OpenAI API")
         self.headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.base_url}"  # Bearer token 授权
+            "Authorization": f"Bearer {self.api_key}"  # Bearer token 授权
         }
 
         # 系统提示，用于指导模型如何回答问题
