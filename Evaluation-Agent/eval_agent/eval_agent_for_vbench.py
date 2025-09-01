@@ -32,15 +32,27 @@ def parse_args():
     args = parser.parse_args()
     return args
 
-
-
-
+# 工具：在候选prompt列表中找与目标最相似的prompt（编辑距离最小）
 def most_similar_string(prompt, string_list):
     similarities = [Levenshtein.distance(prompt, item["Prompt"]) for item in string_list]
     most_similar_idx = similarities.index(min(similarities))
     return string_list[most_similar_idx]
 
-
+# 工具：用参考库prompt替换设计prompt（保持schema一致），但保留Thought
+# chosed_prompts = {
+#     "Step 1": {"Prompt": "A red cat", "Thought": "test cat motion"}
+# }
+# prompt_list = [
+#     {"Prompt": "A red cat jumps"},
+#     {"Prompt": "A dog running"}
+# ]
+# ->
+# {
+#   "Step 1": {
+#     "Prompt": "A red cat jumps",     # 来自参考库，schema 正确
+#     "Thought": "test cat motion"     # 保留原有思考内容
+#   }
+# }
 def check_and_fix_prompt(chosed_prompts, prompt_list):
     results_dict={}
 
@@ -52,7 +64,7 @@ def check_and_fix_prompt(chosed_prompts, prompt_list):
         
     return results_dict
 
-
+# 将VBench评分表某一维度格式化为字符串（用于结果说明）
 def format_dimension_as_string(df, dimension_name):
     row = df.loc[df['Dimension'] == dimension_name]
     if row.empty:
@@ -84,15 +96,18 @@ class EvalAgent:
         self.plan_agent = BaseAgent(system_prompt=sys_prompts["vbench-plan-sys"], use_history=True, temp=0.7)
 
 
-
+    # 找到和指定 prompt 匹配的 辅助信息 auxiliary_info
     def search_auxiliary(self, designed_prompts, prompt):
         for _, value in designed_prompts.items():
             if value['Prompt'] == prompt:
                 return value["auxiliary_info"]
-        raise "Didn't find auxiliary info, please check your json."
-
+        raise ValueError("Didn't find auxiliary info, please check your json."
+)
 
     def sample_and_eval(self, designed_prompts, save_path, tool_name):
+        # 提取 prompt → 生成视频（self.tools.sample）
+        # 绑定辅助信息
+        # 调用评测工具对视频进行打分
         prompts = [item["Prompt"] for _, item in designed_prompts.items()]
         video_pairs = self.tools.sample(prompts, save_path)
         if 'auxiliary_info' in designed_prompts["Step 1"]:
@@ -104,6 +119,13 @@ class EvalAgent:
 
 
     def reference_prompt(self, search_dim):
+        '''
+        1) 功能定位：
+        - 从 VBench 参考库中检索“包含目标维度(search_dim)”的条目；
+        - 统一字段格式（prompt_en → Prompt，移除 dimension）；
+        - 提取该维度的 auxiliary_info（如 hint），便于后续生成/评测环节使用。
+        - 归属“Prompt参考检索 / 标准化映射”功能，不属于参数导入。
+        '''
         file_path = "./eval_tools/vbench/VBench_full_info.json"
         data = json.load(open(file_path, "r"))
 
@@ -118,8 +140,7 @@ class EvalAgent:
         
         return results
 
-
-
+    # 把数值结果拼成一段可读的总结文本
     def format_eval_result(self, results, reference_table):
         question = results["Sub-aspect"]
         tool_name = results["Tool"]
