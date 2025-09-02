@@ -88,7 +88,9 @@ class EvalAgent:
         self.tools = ToolCalling(sample_model=sample_model, save_mode=save_mode)
         self.sample_model = sample_model
         self.user_query = ""
-        self.tsv_file_path = refer_file
+        CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+        self.tsv_file_path = os.path.join(CUR_DIR,refer_file)
+
     
     def init_agent(self):
 

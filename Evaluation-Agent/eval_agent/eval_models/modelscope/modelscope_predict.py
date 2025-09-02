@@ -1,16 +1,15 @@
 from modelscope.pipelines import pipeline
 from modelscope.outputs import OutputKeys
-import os
-
-CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class ModelScope:
     def __init__(self):
-        self.p = pipeline('text-to-video-synthesis', f'{CUR_DIR}/checkpoints')
-    
+        # 直接用仓库名，首次会自动从云端下载并缓存到本地
+        # 模型页：https://modelscope.cn/models/iic/text-to-video-synthesis
+        self.p = pipeline(
+            task='text-to-video-synthesis',
+            model='iic/text-to-video-synthesis'
+        )
 
     def predict(self, prompt, save_name):
-        input = {
-            'text': prompt,
-        }
-        self.p(input, output_video=save_name)[OutputKeys.OUTPUT_VIDEO]
+        outputs = self.p({'text': prompt}, output_video=save_name)
+        return outputs[OutputKeys.OUTPUT_VIDEO]
