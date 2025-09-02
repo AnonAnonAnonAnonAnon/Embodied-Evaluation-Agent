@@ -165,7 +165,7 @@ class EvalAgent:
             prompt_query = f"Context:\n{prompt_query}\n\nPrompt list:\n{json.dumps(prompt_list)}"
 
             designed_prompts = self.prompt_agent(prompt_query, parse=True)
-            designed_prompts = check_and_fix_prompt(designed_prompts, prompt_list)
+            designed_prompts = check_and_fix_prompt(designed_prompts, prompt_list) # 似乎是为了防止GPT修改prompt
 
 
             plans["eval_results"] = self.sample_and_eval(designed_prompts, self.image_folder, tool_name)
