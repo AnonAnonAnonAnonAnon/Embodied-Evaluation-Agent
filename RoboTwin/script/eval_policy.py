@@ -26,6 +26,10 @@ parent_directory = os.path.dirname(current_file_path)
 
 
 def class_decorator(task_name):
+    """
+    from envs import a module named ${task_name}, which is an env
+    and create an INSTANCE of this task env
+    """
     envs_module = importlib.import_module(f"envs.{task_name}")
     try:
         env_class = getattr(envs_module, task_name)
@@ -36,6 +40,10 @@ def class_decorator(task_name):
 
 
 def eval_function_decorator(policy_name, model_name):
+    """
+    from ${policy_name} (like ACT or RDT) import a module named ${model_name}, which is an embodied model
+    and create an FACTORY of this model
+    """
     try:
         policy_model = importlib.import_module(policy_name)
         return getattr(policy_model, model_name)
@@ -62,7 +70,10 @@ def get_embodiment_config(robot_file):
 
 
 def main(usr_args):
+    # get current time
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # parse user args
     task_name = usr_args["task_name"]
     task_config = usr_args["task_config"]
     ckpt_setting = usr_args["ckpt_setting"]
@@ -73,39 +84,48 @@ def main(usr_args):
     video_save_dir = None
     video_size = None
 
+    # get the model factory
     get_model = eval_function_decorator(policy_name, "get_model")
 
+    # read basic env args from yaml (demo_randomized.yaml)
     with open(f"./task_config/{task_config}.yml", "r", encoding="utf-8") as f:
         args = yaml.load(f.read(), Loader=yaml.FullLoader)
 
-    args['task_name'] = task_name
-    args["task_config"] = task_config
-    args["ckpt_setting"] = ckpt_setting
+    # load env args from user args
+    args['task_name'] = task_name # beat_block_hammer
+    args["task_config"] = task_config # demo_randomized
+    args["ckpt_setting"] = ckpt_setting # 0
 
-    embodiment_type = args.get("embodiment")
+    # get embodiment config(robot config) path from the embodiment setting from basic policy selection 
+    embodiment_type = args.get("embodiment") # [aloha-agilex], which is a LIST
     embodiment_config_path = os.path.join(CONFIGS_PATH, "_embodiment_config.yml")
-
+    # get the config of the robot
     with open(embodiment_config_path, "r", encoding="utf-8") as f:
         _embodiment_types = yaml.load(f.read(), Loader=yaml.FullLoader)
 
+    # define a function to get 
     def get_embodiment_file(embodiment_type):
         robot_file = _embodiment_types[embodiment_type]["file_path"]
         if robot_file is None:
             raise "No embodiment files"
         return robot_file
 
+    # get camera config
     with open(CONFIGS_PATH + "_camera_config.yml", "r", encoding="utf-8") as f:
         _camera_config = yaml.load(f.read(), Loader=yaml.FullLoader)
-
+    # and load camera config to args
     head_camera_type = args["camera"]["head_camera_type"]
     args["head_camera_h"] = _camera_config[head_camera_type]["h"]
     args["head_camera_w"] = _camera_config[head_camera_type]["w"]
 
+    # load robot config to args
     if len(embodiment_type) == 1:
+        # the task support 1 kind of robot
         args["left_robot_file"] = get_embodiment_file(embodiment_type[0])
         args["right_robot_file"] = get_embodiment_file(embodiment_type[0])
         args["dual_arm_embodied"] = True
     elif len(embodiment_type) == 3:
+        # the task support 3 kinds of robot
         args["left_robot_file"] = get_embodiment_file(embodiment_type[0])
         args["right_robot_file"] = get_embodiment_file(embodiment_type[1])
         args["embodiment_dis"] = embodiment_type[2]
@@ -121,6 +141,7 @@ def main(usr_args):
     else:
         embodiment_name = str(embodiment_type[0]) + "+" + str(embodiment_type[1])
 
+    # set save path (video and data)
     save_dir = Path(f"eval_result/{task_name}/{policy_name}/{task_config}/{ckpt_setting}/{current_time}")
     save_dir.mkdir(parents=True, exist_ok=True)
 
@@ -150,8 +171,9 @@ def main(usr_args):
     print("\033[94mEmbodiment Config:\033[0m " + embodiment_name)
     print("\n==================================")
 
+    # create a task env INSTANCE
     TASK_ENV = class_decorator(args["task_name"])
-    args["policy_name"] = policy_name
+    args["policy_name"] = policy_name # it comes so late??
     usr_args["left_arm_dim"] = len(args["left_embodiment_config"]["arm_joints_name"][0])
     usr_args["right_arm_dim"] = len(args["right_embodiment_config"]["arm_joints_name"][1])
 
