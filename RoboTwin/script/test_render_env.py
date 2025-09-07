@@ -111,10 +111,14 @@ def main():
     
     now_id = 0
     now_seed = 0
+    args['render_freq'] = 10 # force rendering
     print("args['render_freq']", args['render_freq'])
     TASK_ENV.setup_demo(now_ep_num=now_id, seed=now_seed, is_test=True, **args)
     print(TASK_ENV.render_freq)
     print(TASK_ENV.viewer)
+
+    # play one episode
+    TASK_ENV.play_once()
 
 
 if __name__ == '__main__':
