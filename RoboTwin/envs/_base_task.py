@@ -122,13 +122,10 @@ class Base_Task(gym.Env):
         self.load_camera(**kwags)
         self.robot.move_to_homestate()
 
-        print("self.render_freq=",self.render_freq)
         render_freq = self.render_freq
-        print("render_freq=",render_freq)
         self.render_freq = 0
         self.together_open_gripper(save_freq=None)
         self.render_freq = render_freq
-        print("self.render_freq=",self.render_freq)
 
         self.robot.set_origin_endpose()
         self.load_actors()
