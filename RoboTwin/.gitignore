@@ -29,3 +29,5 @@ envs/curobo/*
 data/
 outputs/
 
+# temporary figures/pictures
+script/temp_figs

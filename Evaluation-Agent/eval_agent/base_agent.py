@@ -7,25 +7,35 @@ class BaseAgent:
 
         self.use_history = use_history
 
-        self.api_key = os.getenv("OPENAI_API_KEY", "").strip()
-        if not self.api_key:
-            raise ValueError("Environment variable OPENAI_API_KEY is not set or empty")
-        self.model = os.getenv("OPENAI_MODEL", "gpt-4o").strip()
-        if not self.model:
-            raise ValueError("Environment variable OPENAI_MODEL is not set or empty")
-        self.base_url = None
-        third_party_url = (os.getenv("OPENAI_BASE_URL", "") or os.getenv("OPENAI_API_BASE", "")).strip().rstrip("/")
-        if third_party_url:
-            self.base_url = third_party_url
-        if self.base_url:
-            self.client = OpenAI(
-                api_key=self.api_key,
-                base_url=self.base_url
-            )
-        else:
-            self.client = OpenAI(
-                api_key=self.api_key
-            )
+        # self.api_key = os.getenv("OPENAI_API_KEY", "").strip()
+        # if not self.api_key:
+        #     raise ValueError("Environment variable OPENAI_API_KEY is not set or empty")
+        # self.model = os.getenv("OPENAI_MODEL", "gpt-4o").strip()
+        # if not self.model:
+        #     raise ValueError("Environment variable OPENAI_MODEL is not set or empty")
+        # self.base_url = None
+        # third_party_url = (os.getenv("OPENAI_BASE_URL", "") or os.getenv("OPENAI_API_BASE", "")).strip().rstrip("/")
+        # if third_party_url:
+        #     self.base_url = third_party_url
+        # if self.base_url:
+        #     self.client = OpenAI(
+        #         api_key=self.api_key,
+        #         base_url=self.base_url
+        #     )
+        # else:
+        #     self.client = OpenAI(
+        #         api_key=self.api_key
+        #     )
+
+        # self.client = OpenAI()
+        self.client = OpenAI(
+            # defaults to os.environ.get("OPENAI_API_KEY")
+            api_key="sk-xDai8Jxb9bLlXroX6bFiS9MF96fj0tqAe8Zc9mPV0xjDK98S",
+            base_url="https://api.chatanywhere.tech/v1"
+            # base_url="https://api.chatanywhere.org/v1"
+        )
+        self.system = system_prompt
+
 
         self.temp = temp
         self.top_p = top_p
