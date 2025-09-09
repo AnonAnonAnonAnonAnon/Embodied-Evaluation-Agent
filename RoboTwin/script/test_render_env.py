@@ -80,8 +80,19 @@ def main():
         "seed": 0,
         "gpu_id": 0,
 
-        "policy_name":'ACT'
+        "policy_name":'ACT',
+
+        # "DEBUG": False,
+        "DEBUG": True,
     }
+    kwargs["ckpt_dir"] = f"policy/ACT/act_ckpt/act-{kwargs['task_name']}/{kwargs['ckpt_setting']}-{kwargs['expert_data_num']}"
+    kwargs['config'] = f"policy/{kwargs['policy_name']}/deploy_policy.yml"
+    
+    with open(kwargs['config'], "r", encoding="utf-8") as f:
+        config = yaml.safe_load(f)
+    
+    config.update(kwargs)
+    kwargs = config
 
     # create a task instance
     TASK_ENV = class_decorator(kwargs['task_name']) 
@@ -127,8 +138,12 @@ def main():
     
     now_id = 0
     now_seed = 0
-    args['render_freq'] = 10 # force rendering
+    args['render_freq'] = 30 # force rendering
     print("args['render_freq']", args['render_freq'])
+
+    args["eval_mode"] = True
+    print("SET EVAL_MODE=TRUE")
+
     TASK_ENV.setup_demo(now_ep_num=now_id, seed=now_seed, is_test=True, **args)
     # print(TASK_ENV.render_freq)
     # print(TASK_ENV.viewer)
@@ -137,32 +152,32 @@ def main():
     # # print(TASK_ENV.viewer.render_scene.update_render())
     # print(TASK_ENV.viewer.scene.update_render())
 
+    if 0:
+        # try to screen shot
+        viewer = TASK_ENV.viewer
+        print("press q to roll to next stage")
+        while not viewer.closed:
+            if viewer.window.key_down("p"):  # Press 'p' to take the screenshot
+                print("screen shot")
+                rgba = viewer.window.get_picture("Color")
+                rgba_img = (rgba * 255).clip(0, 255).astype("uint8")
+                rgba_pil = Image.fromarray(rgba_img)
+                # rgba_pil.save("screenshot.png")
+            if viewer.window.key_down("q"):
+                print('q pressed')
+                TASK_ENV.close_env()
+                break
+            viewer.scene.step()
+            viewer.scene.update_render()
+            viewer.render()
 
-    # try to screen shot
-    viewer = TASK_ENV.viewer
-    print("press q to roll to next stage")
-    while not viewer.closed:
-        if viewer.window.key_down("p"):  # Press 'p' to take the screenshot
-            print("screen shot")
-            rgba = viewer.window.get_picture("Color")
-            rgba_img = (rgba * 255).clip(0, 255).astype("uint8")
-            rgba_pil = Image.fromarray(rgba_img)
-            # rgba_pil.save("screenshot.png")
-        if viewer.window.key_down("q"):
-            print('q pressed')
-            TASK_ENV.close_env()
-            break
-        viewer.scene.step()
-        viewer.scene.update_render()
-        viewer.render()
-
-    # play one episode
-    print("begin to play once")
-    TASK_ENV.play_once()
-    episode_info = TASK_ENV.play_once()
-    TASK_ENV.close_env()
-    print('episode_info:')
-    print(episode_info)
+        # play one episode
+        print("begin to play once")
+        TASK_ENV.play_once()
+        episode_info = TASK_ENV.play_once()
+        TASK_ENV.close_env()
+        print('episode_info:')
+        print(episode_info)
 
 
     # get policy/model

@@ -19,6 +19,7 @@ import importlib
 import argparse
 import pdb
 
+# location: ./description/utils/generate_episode_instructions.py
 from generate_episode_instructions import *
 
 current_file_path = os.path.abspath(__file__)
