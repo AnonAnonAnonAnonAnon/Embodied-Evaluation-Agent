@@ -15,6 +15,9 @@ import importlib
 
 import yaml
 
+# image operations
+from PIL import Image
+
 def class_decorator(task_name):
     """
     from envs import a module named ${task_name}, which is an env
@@ -48,6 +51,17 @@ def get_embodiment_file(embodiment_type):
         raise "No embodiment files"
     return robot_file
 
+def eval_function_decorator(policy_name, model_name):
+    """
+    from ${policy_name} (like ACT or RDT) import a module named ${model_name}, which is an embodied model
+    and create an FACTORY of this model
+    """
+    try:
+        policy_model = importlib.import_module(policy_name)
+        return getattr(policy_model, model_name)
+    except ImportError as e:
+        raise e
+
 def get_embodiment_config(robot_file):
     robot_config_file = os.path.join(robot_file, "config.yml")
     with open(robot_config_file, "r", encoding="utf-8") as f:
@@ -64,7 +78,9 @@ def main():
         "ckpt_setting": 0,
         "expert_data_num": 50,
         "seed": 0,
-        "gpu_id": 0
+        "gpu_id": 0,
+
+        "policy_name":'ACT'
     }
 
     # create a task instance
@@ -114,12 +130,60 @@ def main():
     args['render_freq'] = 10 # force rendering
     print("args['render_freq']", args['render_freq'])
     TASK_ENV.setup_demo(now_ep_num=now_id, seed=now_seed, is_test=True, **args)
-    print(TASK_ENV.render_freq)
-    print(TASK_ENV.viewer)
+    # print(TASK_ENV.render_freq)
+    # print(TASK_ENV.viewer)
+    # print(TASK_ENV.viewer.render_scene)
+    # print(TASK_ENV.viewer.scene)
+    # # print(TASK_ENV.viewer.render_scene.update_render())
+    # print(TASK_ENV.viewer.scene.update_render())
+
+
+    # try to screen shot
+    viewer = TASK_ENV.viewer
+    print("press q to roll to next stage")
+    while not viewer.closed:
+        if viewer.window.key_down("p"):  # Press 'p' to take the screenshot
+            print("screen shot")
+            rgba = viewer.window.get_picture("Color")
+            rgba_img = (rgba * 255).clip(0, 255).astype("uint8")
+            rgba_pil = Image.fromarray(rgba_img)
+            # rgba_pil.save("screenshot.png")
+        if viewer.window.key_down("q"):
+            print('q pressed')
+            TASK_ENV.close_env()
+            break
+        viewer.scene.step()
+        viewer.scene.update_render()
+        viewer.render()
 
     # play one episode
+    print("begin to play once")
     TASK_ENV.play_once()
+    episode_info = TASK_ENV.play_once()
+    TASK_ENV.close_env()
+    print('episode_info:')
+    print(episode_info)
 
+
+    # get policy/model
+    print("getting model")
+    get_model = eval_function_decorator(kwargs['policy_name'], "get_model")
+    eval_func = eval_function_decorator(kwargs['policy_name'], "eval")
+    reset_func = eval_function_decorator(kwargs['policy_name'],"reset_model")
+    model = get_model(kwargs)
+    print("resetting model")
+    reset_func(model)
+    print("model initialized")
+
+    # begin eval
+    print("begin eval")
+    while TASK_ENV.take_action_cnt < TASK_ENV.step_lim:
+        observation = TASK_ENV.get_obs()
+        eval_func(TASK_ENV, model, observation)
+        if TASK_ENV.eval_success:
+            succ = True
+            break
+    TASK_ENV.close_env()
 
 if __name__ == '__main__':
     from test_render import Sapien_TEST
