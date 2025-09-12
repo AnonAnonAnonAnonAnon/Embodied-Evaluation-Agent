@@ -12,6 +12,8 @@ class Latte1:
         self.model_name = "maxin-cn/Latte-1"
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.video_length = 16 # 1 (text-to-image) or 16 (text-to-video)
+
+
         self.pipe = LattePipeline.from_pretrained(self.model_name, torch_dtype=torch.float16, resume_download=True).to(self.device) # "maxin-cn/Latte-1"
         
                 # ===== 省显存开关（视频管线同样适用）=====
@@ -22,6 +24,8 @@ class Latte1:
             self.pipe.enable_xformers_memory_efficient_attention()  # 如可用，进一步省显存
         except Exception:
             pass
+
+        # self.pipe = LattePipeline.from_pretrained(self.model_path, torch_dtype=torch.float16).to(self.device) # "maxin-cn/Latte-1"
         
         # Using temporal decoder of VAE
         vae = AutoencoderKLTemporalDecoder.from_pretrained(self.model_name, subfolder="vae_temporal_decoder", torch_dtype=torch.float16, resume_download=True).to(self.device) # "maxin-cn/Latte-1"
