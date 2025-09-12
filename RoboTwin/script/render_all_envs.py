@@ -24,6 +24,8 @@ import subprocess
 import cv2
 import time
 
+import logging
+
 def save_all_frames(TASK_ENV, stop_event):
     """
     Save all frames captured during the task execution.
@@ -31,30 +33,42 @@ def save_all_frames(TASK_ENV, stop_event):
     image_index = 0
     viewer = TASK_ENV.viewer
 
-    lock = threading.Lock()
-    while not stop_event.is_set() and not viewer.closed:
-        # if viewer.window.key_down("p"):  # Press 'p' to take the screenshot
-        print(f"screen shot {image_index}")
-        try:
-            rgba = viewer.window.get_picture("Color")
-            rgba_img = (rgba * 255).clip(0, 255).astype("uint8")
-            print("image shape: {}".format(rgba_img.shape) + f" with type {type(rgba_img)}")
-            bgra_img_cv2 = rgba_img[:, :, [2, 1, 0, 3]]
-            cv2.imwrite(f"script/temp_figs/screenshot_{image_index:03d}.png", bgra_img_cv2)
-            image_index += 1
-        except Exception as e:
-            print(e)
-        # rgb_cv2 = rgba_img[:, :, :3]
-        # rgba_pil = Image.fromarray(rgba_img)
-        # rgba_pil.save("screenshot.png")
+    lock = threading.Lock() # threading lock
 
-        if viewer.window.key_down("q"):
-            print('q pressed')
-            TASK_ENV.close_env()
-            break
-        viewer.scene.step()
-        viewer.scene.update_render()
-        viewer.render()
+    try:
+        while not stop_event.is_set():
+            with lock:
+                if viewer.closed:
+                    break
+                
+                try:
+                    # capture frames
+                    # if viewer.window.key_down("p"):  # Press 'p' to take the screenshot
+                    print(f"screen shot {image_index}")
+                    rgba = viewer.window.get_picture("Color")
+                    rgba_img = (rgba * 255).clip(0, 255).astype("uint8")
+                    print("image shape: {}".format(rgba_img.shape) + f" with type {type(rgba_img)}")
+                    bgra_img_cv2 = rgba_img[:, :, [2, 1, 0, 3]]
+                    cv2.imwrite(f"script/temp_figs/screenshot_{image_index:03d}.png", bgra_img_cv2)
+                    image_index += 1
+                except Exception as e:
+                    print(e)
+                # rgb_cv2 = rgba_img[:, :, :3]
+                # rgba_pil = Image.fromarray(rgba_img)
+                # rgba_pil.save("screenshot.png")
+
+            if viewer.window.key_down("q"):
+                print('q pressed')
+                TASK_ENV.close_env()
+                break
+            with lock:
+                viewer.scene.step()
+                viewer.scene.update_render()
+                viewer.render()
+    finally:
+        if not viewer.closed:
+            viewer.close()
+        logging.info("Frame capture thread exited safely")
 
 
 def frames2mp4(task_name):
@@ -188,14 +202,18 @@ def main():
                   'pick_diverse_bottles.py', 'place_container_plate.py', 'place_shoe.py', 'shake_bottle.py', 'click_alarmclock.py', 'pick_dual_bottles.py',
                   'place_dual_shoes.py', 'press_stapler.py', 'stack_blocks_three.py', 'click_bell.py', 'lift_pot.py', 'place_a2b_left.py', 'place_empty_cup.py',
                   'put_bottles_dustbin.py', 'stack_blocks_two.py', 'move_can_pot.py', 'place_a2b_right.py', 'place_fan.py', 'put_object_cabinet.py', 'stack_bowls_three.py']
-
+    task_files = sorted(task_files)
     task_names = [
         task_file.split('.')[0] for task_file in task_files
     ]
 
     for task_name in task_names:
-        print(f'rendering {task_name}')
-        render_env(task_name)
+        try:
+            print(f'rendering {task_name}')
+            render_env(task_name)
+        except Exception as e:
+            print(e)
+            continue
 
 def render_env(task_name:str="beat_block_hammer"):
     # orig instruction:
@@ -208,7 +226,7 @@ def render_env(task_name:str="beat_block_hammer"):
         "task_config": "demo_randomized",
         "ckpt_setting": 0,
         "expert_data_num": 50,
-        "seed": 0,
+        "seed": 42,
         "gpu_id": 0,
 
         "policy_name":'ACT',
