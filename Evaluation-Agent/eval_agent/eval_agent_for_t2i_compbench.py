@@ -73,7 +73,8 @@ class EvalAgent:
         self.tools = ToolCalling(sample_model=sample_model, save_mode=save_mode)
         self.sample_model = sample_model
         self.user_query = ""
-        self.tsv_file_path = refer_file
+        self.CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+        self.tsv_file_path = os.path.join(self.CUR_DIR, refer_file)
         
     
     
@@ -92,7 +93,8 @@ class EvalAgent:
 
     def reference_prompt(self, search_dim):
         search_item = search_dim.replace("_binding", "")
-        file_path = f"./eval_tools/t2i_comp/prompt_file/{search_item}_val.txt"
+        CUR_DIR = os.path.dirname(os.path.abspath(__file__))
+        file_path = f"{CUR_DIR}/eval_tools/t2i_comp/prompt_file/{search_item}_val.txt"
         
         with open(file_path, "r") as f:
             lines = f.readlines()
@@ -155,14 +157,15 @@ class EvalAgent:
                 break
             
             tool_name = plans["Tool"].lower().strip().replace(" ", "_")
+            # Color Binding
             reference_table = format_dimension_as_string(df, plans["Tool"])
-            
+            # 'Color Binding: Very High -> [0.9482, 1.0), High -> [0.8508, 0.9482), Moderate -> [0.5013, 0.8508), Low -> [0.0851, 0.5013), Very Low -> [0.0, 0.0851)'
             prompt_query = json.dumps(plans)
             prompt_list = self.reference_prompt(tool_name)
             prompt_query = f"Context:\n{prompt_query}\n\nPrompt list:\n{json.dumps(prompt_list)}"
 
             designed_prompts = self.prompt_agent(prompt_query, parse=True)
-            designed_prompts = check_and_fix_prompt(designed_prompts, prompt_list)
+            designed_prompts = check_and_fix_prompt(designed_prompts, prompt_list) # 似乎是为了防止GPT修改prompt
 
 
             plans["eval_results"] = self.sample_and_eval(designed_prompts, self.image_folder, tool_name)
