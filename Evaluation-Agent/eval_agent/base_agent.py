@@ -35,7 +35,7 @@ class BaseAgent:
             # base_url="https://api.chatanywhere.org/v1"
         )
         self.system = system_prompt
-
+        self.model = "gpt-4o"
 
         self.temp = temp
         self.top_p = top_p
@@ -50,6 +50,7 @@ class BaseAgent:
         """
         直接调用实例时，相当于发送用户消息并得到回复。
         """
+        
         self.messages.append({"role": "user", "content": message})
         result = self.generate(message, parse)
         self.messages.append({"role": "assistant", "content": result})
