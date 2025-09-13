@@ -14,14 +14,14 @@
             "console": "integratedTerminal",
             "args": [
                 // "--user_query", "How does diffusion work?",
-                "--user_query", "color_binding",
-                "--model", "SD-14"
+                "--user_query", "完成具身任务的精度怎么样",
+                // "--model", "SD-14"
             ],
             "env": {
                 "OPENAI_API_KEY": "sk-xDai8Jxb9bLlXroX6bFiS9MF96fj0tqAe8Zc9mPV0xjDK98S",
                 "OPENAI_BASE_URL": "https://api.chatanywhere.tech/v1",
                 "OPENAI_MODEL": "gpt-4o",
-                "OPENAI_MAX_TOKENS": "500"
+                "OPENAI_MAX_TOKENS": "1000"
             }
         }
     ]
